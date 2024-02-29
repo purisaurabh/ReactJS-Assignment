@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface ShowTaskProps {
-  key: string; // 'key' is a reserved word in JavaScript, consider using a different name
+  key: string; 
   todo: {
     id: number;
     text: string;

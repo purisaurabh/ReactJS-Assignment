@@ -1,5 +1,6 @@
 import React from 'react';
-import Task from './Task';
+import Task from './components/Task';
+
 
 const App: React.FC = () => {
   return (
