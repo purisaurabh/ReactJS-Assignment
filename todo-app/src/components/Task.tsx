@@ -1,26 +1,26 @@
 import React, { useState, ChangeEvent } from 'react';
 import ShowTask from './ShowTask';
 
-interface Task {
+interface ITask {
   id: number;
   text: string;
   completed: boolean;
 }
 
 const Task: React.FC = () =>{
-
-  const initialTodos: Task[] = [
+  const initialTodos: ITask[] = [
     { id: 1, text: 'this is the first task', completed: false },
     { id: 2, text: 'this is the second task', completed: true },
+    { id: 3, text: 'this is the third task', completed: true },
   ];
 
 
-  const [task, setTask] = useState<Task[]>(initialTodos);
+  const [task, setTask] = useState<ITask[]>(initialTodos);
   const [text, setText] = useState<string>('');
   const [showChecked , setShowChecked] = useState<boolean>(false)
 
   const addTask = (text: string) => {
-    const newTask: Task = {
+    const newTask: ITask = {
       id: Date.now(),
       text,
       completed: false,
@@ -43,7 +43,7 @@ const Task: React.FC = () =>{
   };
 
 
-  const getAllMarkedTodo = ():Task[] =>{
+  const getAllMarkedTodo = ():ITask[] =>{
     if (showChecked) {
       return task.filter(todo => todo.completed);
     } else {
