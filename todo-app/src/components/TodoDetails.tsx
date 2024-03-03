@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DATA_URL } from '../utils/constants';
+import { lstat } from 'fs';
 
 const TodoDetails = () => {
   const { id } = useParams();
@@ -27,16 +28,20 @@ const TodoDetails = () => {
 
   return (
     <div>
-      {todo ? (
-        <div>
-          {/* <h2>{todo.title}</h2> */}
-          {/* <p>Completed: {todo.completed ? 'Yes' : 'No'}</p> */}
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <h1>Todo Details</h1>
     </div>
   );
 };
 
 export default TodoDetails;
+
+
+// {/* {todo ? (
+//         <div>
+//           {/* <h2>{todo.title}</h2> */}
+//           {/* <p>Completed: {todo.completed ? 'Yes' : 'No'}</p> */}
+//           </div>
+//           ) : (
+//             <p>Loading...</p>
+//           )
+//           } */}
