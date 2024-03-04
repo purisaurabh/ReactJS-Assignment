@@ -15,14 +15,17 @@ interface ShowTaskProps {
 
 const ShowTask: React.FC<ShowTaskProps> = ({ key, todo, deleteTask, completedTask }) => {
   return (
-    <div style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-      <input
-        type='checkbox'
-        checked={todo.completed}
-        onChange={() => completedTask(todo.id)}
-      ></input>
-      <p>{key}</p>
-      <p>{todo.text}</p>
+    <div className="base-container">
+      <div className = 'todo-item' style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+        <input
+          type='checkbox'
+          checked={todo.completed}
+          onChange={() => completedTask(todo.id)}
+        ></input>
+        <p>{key}</p>
+        <p>{todo.text}</p>
+      </div>
+     
       <button onClick={() => deleteTask(todo.id)}>Delete</button>
     </div>
   );
