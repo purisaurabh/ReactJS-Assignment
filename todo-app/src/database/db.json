@@ -1,53 +1,48 @@
 {
   "tasks": [
     {
-      "id": "3",
-      "text": "this is the third task",
+      "id": 3,
+      "title": "this is the third task",
       "completed": false
     },
     {
-      "id": "4",
-      "text": "this is the fourth task",
+      "id": 4,
+      "title": "this is the fourth task",
       "completed": true
     },
     {
-      "id": "5",
-      "text": "this is the fifth task",
+      "id": 5,
+      "title": "this is the fifth task",
       "completed": false
     },
     {
-      "id": "6",
-      "text": "this is the sixth task",
+      "id": 6,
+      "title": "this is the sixth task",
       "completed": false
     },
     {
-      "id": "7",
-      "text": "this is the another task",
+      "id": 8,
+      "title": "this is the another task",
       "completed": false
     },
     {
-      "id": "8",
-      "text": "this is the seventh task",
-      "completed": true
-    },
-    {
-      "id": "9",
-      "text": "this is the eighth task",
+      "id": 9,
+      "title": "this is the eighth task",
       "completed": false
     },
     {
       "id": 1709204096440,
-      "text": "asdfasdf",
+      "title": "asdfasdf",
       "completed": false
     },
     {
       "id": 1709204131610,
-      "text": "Pratik",
+      "title": "Pratik",
       "completed": false
     },
     {
       "id": 1709204229474,
-      "text": "new data",
+      "title": "new data",
       "completed": false
     }
   ]

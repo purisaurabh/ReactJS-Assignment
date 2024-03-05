@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Task from './components/Task';
+import React from 'react';
+import TodoApp from './components/TodoApp';
 
 
 
 const App: React.FC = () => {
   return (
     <>
-      <Task />
+      <TodoApp />
     </>
   );
 }

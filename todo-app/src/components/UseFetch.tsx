@@ -1,44 +1,31 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { ITask } from './interface';
+import { TodoItem } from '../types/todo';
+import { DATA_URL } from '../utils/constants';
 
-interface FetchState {
-  data: ITask[];
-  loading: boolean;
-  error: string | null;
-}
 
-const useFetch = (url: string) => {
-  const [fetchState, setFetchState] = useState<FetchState>({
-    data: [],
-    loading: true,
-    error: null,
-  });
+const useFetch = () => {
+  const [data, setData] = useState<TodoItem[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-  
-        setTimeout(async () => {
-          const res = await fetch(url);
-
-          if (!res.ok) {
-            throw new Error(`Got Error: ${res.status}`);
-          }
-
-          const jsonData = await res.json();
-          setFetchState({ data: jsonData, loading: false, error: null });
-        }, 1000);
+        const res = await fetch(DATA_URL);
+        if (!res.ok) {
+          throw new Error(`Got Error: ${res.status}`);
+        }
+        const jsonData = await res.json();
+        setData(jsonData)
       } catch (err) {
-        setFetchState({ data: [], loading: false, error: `Error: ${err}` });
+        console.log("Error Occured : ", err)
       }
     };
 
     fetchData();
-  }, [url]);
+  }, [DATA_URL]);
 
-  return fetchState;
+  return data;
 };
 
 export default useFetch;
