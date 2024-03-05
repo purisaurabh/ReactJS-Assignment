@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f8f8;
     margin: 0;
@@ -11,7 +11,7 @@ body {
 
 
 
-.container{
+.container {
     width: 40%;
     min-width: 450px;
     position: absolute;
@@ -32,28 +32,28 @@ body {
     border-radius: 4px;
 }
 
-.todo-item{
+.todo-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;   
+    margin-bottom: 10px;
 }
 
-.todo-item input[type="checkbox"]{
+.todo-item input[type="checkbox"] {
     margin-right: 10px;
 }
 
-.todo-item p:first-child{
+.todo-item p:first-child {
     margin: 0;
 }
 
-.todo-item p:last-child{
+.todo-item p:last-child {
     margin: 0;
     flex: 1;
 }
 
-.todo-item p{
+.todo-item p {
     white-space: nowrap;
-    overflow:visible;
+    overflow: visible;
     text-overflow: ellipsis;
     width: 50px;
 }
@@ -164,19 +164,30 @@ body {
     height: 100%;
 }
 
-.show-all{
-    margin-right:150px;
+.show-all {
+    margin-right: 150px;
     display: flex;
     align-items: center;
 }
 
-.show-all input[type="checkbox"]{
+.show-all input[type="checkbox"] {
     margin-right: 1px;
 }
 
-.show-all p{
+.show-all p {
     white-space: nowrap;
-    overflow:visible;
+    overflow: visible;
     text-overflow: ellipsis;
     width: 400px;
 }
+
+
+
+
+.d-flex {
+    display: flex;
+}
+
+.gap-2 {
+    gap: "12px";
+} */

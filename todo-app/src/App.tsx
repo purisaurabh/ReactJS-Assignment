@@ -1,11 +1,12 @@
 import React from 'react';
-import Task from './components/Task';
+
+import TodoApp from './components/TodoApp';
 
 
 const App: React.FC = () => {
   return (
     <>
-      <Task />
+      <TodoApp />
     </>
   );
 }
