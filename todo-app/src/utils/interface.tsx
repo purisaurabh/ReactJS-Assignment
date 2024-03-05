@@ -1,5 +1,5 @@
-export interface ITask {
-    id: string;
-    text: string;
+export interface TodoItem {
+    id: number;
+    title: string;
     completed: boolean;
 }

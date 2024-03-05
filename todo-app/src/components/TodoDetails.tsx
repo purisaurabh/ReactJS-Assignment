@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { DATA_URL } from '../utils/constants';
-import { lstat } from 'fs';
+import { TodoItem } from '../utils/interface';
+
+
 
 const TodoDetails = () => {
   const { id } = useParams();
-  const [todo, setTodo] = useState({});
+  const [todo, setTodo] = useState<TodoItem[] | null>(null);
 
   useEffect(() => {
     const fetchTodo = async () => {
       try {
         const response = await fetch(`${DATA_URL}/${id}`);
-        
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
@@ -26,9 +27,12 @@ const TodoDetails = () => {
     fetchTodo();
   }, [id]);
 
+  console.log("Data : ", todo)
+
+
   return (
     <div>
-      <h1>Todo Details</h1>
+      {/* <h1>{todo?.id}</h1> */}
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { ITask } from './interface'
 import { DATA_URL } from './constants'
+import { TodoItem } from './interface'
 
 
 const useFetch = () => {
-    const [task, setTask] = useState<ITask[]>([])
+    const [task, setTask] = useState<TodoItem[]>([])
     const fetchData = async () => {
         try {
             const res = await fetch(DATA_URL)
@@ -21,7 +21,7 @@ const useFetch = () => {
     useEffect(() => {
         fetchData()
     }, [DATA_URL])
-    
+
     return task
 }
 

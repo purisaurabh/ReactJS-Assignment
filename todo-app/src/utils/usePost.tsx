@@ -1,16 +1,12 @@
 import { DATA_URL } from "./constants";
 import React, { useEffect, useState } from 'react'
-import { ITask } from "./interface";
+import { TodoItem } from "../utils/interface";
 
 const usePost = () => {
-    // const [data, setData] = useState<ITask[]>([])
-    // useEffect(() =>{
-    //     fetchPost
-    // } ,[])
 
-    const fetchPost = async (newTask: ITask) => {
+    const fetchPost = async (newTask: TodoItem) => {
         try {
-             const response = await fetch(DATA_URL, {
+            const response = await fetch(DATA_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -22,14 +18,12 @@ const usePost = () => {
             }
             const res = await response.json()
             console.log("Data from the post fetch : ", res)
-            // setData(res)
-            return res
+            return true
         } catch (err) {
             console.log("some error occured : ", err)
+            return false
         }
     }
-
-   
 
     return {
         fetchPost
