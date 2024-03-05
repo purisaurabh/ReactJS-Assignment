@@ -1,11 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+
 
 const TodoListItem = ({ completed, title, id, markTodoCompleted, deleteTodo }: { completed: boolean, title: string, id: number, markTodoCompleted: (id: number, completed: boolean) => void, deleteTodo: (id: number) => void }) => {
+    const navigate = useNavigate();
+    const handleTitleClick = () => {
+        navigate(`/todo-details/${id}`);
+    };
     return (
         <div>
             <input type='checkbox' checked={completed} onChange={(e) => markTodoCompleted(id, e.target.checked)}></input>
-            <Link to={`/todo-details/${id}`}><label>{title}</label></Link>
+            <label onClick={handleTitleClick} >{title}</label>
             <button onClick={() => deleteTodo(id)}>Delete</button>
         </div>
     )
