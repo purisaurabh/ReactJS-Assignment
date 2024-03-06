@@ -11,7 +11,7 @@
     "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
     "bootstrap": "^5.3.3",
-    "json-server": "^1.0.0-alpha.23",
+    "json-ser ver": "^1.0.0-alpha.23",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
     "react-dom": "^18.2.0",
@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --check '**/**/*.{js,jsx,ts,tsx,css}'",
+    "prettier:fix": "prettier --write '**/**/*.{js,jsx,ts,tsx,css}'"
   },
   "eslintConfig": {
     "extends": [

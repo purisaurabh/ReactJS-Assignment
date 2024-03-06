@@ -1,9 +1,9 @@
-import React from 'react'
-import "bootstrap/dist/css/bootstrap.min.css"
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -12,14 +12,24 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Add Todo</Nav.Link>
-            <Nav.Link href="#link">Show All</Nav.Link>
-            <Nav.Link href="#link">Todo Details</Nav.Link>
+            <Link to={"/"}>Home</Link>
+          </Nav>
+          <Nav className="me-auto">
+            <Link to={"/show-all"}>Show All</Link>
+          </Nav>
+          <Nav className="me-auto">
+            <Link to={"/search"}>Search</Link>
+          </Nav>
+          <Nav className="me-auto">
+            <Link to={"/sort"}>Sort</Link>
+          </Nav>
+          <Nav className="me-auto">
+            <Link to={"/filter"}>Filter</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
