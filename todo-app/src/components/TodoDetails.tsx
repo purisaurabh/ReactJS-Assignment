@@ -7,7 +7,7 @@ import { TodoItem } from '../utils/interface';
 
 const TodoDetails = () => {
   const { id } = useParams();
-  const [todo, setTodo] = useState<TodoItem[] | null>(null);
+  const [todo, setTodo] = useState<TodoItem | null>(null);
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -27,12 +27,16 @@ const TodoDetails = () => {
     fetchTodo();
   }, [id]);
 
+  console.log({ id })
+
   console.log("Data : ", todo)
 
 
   return (
     <div>
-      {/* <h1>{todo?.id}</h1> */}
+      <h1>{todo?.id}</h1>
+      <h1>{todo?.title}</h1>
+      <h1>{(todo && todo.completed) ? <p>Completed</p> : <p>Not Completed</p>}</h1>
     </div>
   );
 };

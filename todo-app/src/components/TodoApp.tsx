@@ -6,14 +6,17 @@ import { TodoItem } from '../utils/interface'
 
 import { DATA_URL } from '../utils/constants'
 import usePost from '../utils/usePost'
+import useFetch from '../utils/useFetch'
 
 const TodoApp = () => {
-    // const { data } = useFetch()
+    const todoItems = useFetch()
     const [todos, setTodos] = useState<TodoItem[]>([])
     const [showCompleted, setShowCompleted] = useState(false)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<string>("")
     const { fetchPost } = usePost()
+
+    console.log({ todoItems })
 
     // we should have this is in another component
     useEffect(() => {
@@ -41,7 +44,7 @@ const TodoApp = () => {
         if (flagValue) {
             alert("Add Todo Successfully")
         }
-
+        setTodos([...todos, newTodo])
     }
 
     const displayTodos = showCompleted ? todos.filter((todo) => todo.completed === true) : todos

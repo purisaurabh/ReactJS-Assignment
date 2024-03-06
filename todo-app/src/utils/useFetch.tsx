@@ -5,6 +5,7 @@ import { TodoItem } from './interface'
 
 const useFetch = () => {
     const [task, setTask] = useState<TodoItem[]>([])
+
     const fetchData = async () => {
         try {
             const res = await fetch(DATA_URL)
@@ -22,6 +23,7 @@ const useFetch = () => {
         fetchData()
     }, [DATA_URL])
 
+    console.log({ task })
     return task
 }
 
