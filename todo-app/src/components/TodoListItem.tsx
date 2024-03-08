@@ -10,9 +10,9 @@ const TodoListItem = ({
 }: {
   completed: boolean;
   title: string;
-  id: number;
-  markTodoCompleted: (id: number, completed: boolean) => void;
-  deleteTodo: (id: number) => void;
+  id: string;
+  markTodoCompleted: (id: string, completed: boolean) => void;
+  deleteTodo: (id: string) => void;
 }) => {
   const navigate = useNavigate();
   const handleTitleClick = () => {
@@ -31,4 +31,4 @@ const TodoListItem = ({
   );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);

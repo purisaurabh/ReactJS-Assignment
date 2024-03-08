@@ -4,8 +4,8 @@ import TodoListItem from "./TodoListItem";
 
 const TodoList = (props: {
   todos: TodoItem[];
-  markTodoCompleted: (id: number, completed: boolean) => void;
-  deleteTodo: (id: number) => void;
+  markTodoCompleted: (id: string, completed: boolean) => void;
+  deleteTodo: (id: string) => void;
 }) => {
   return (
     <div>
@@ -27,4 +27,4 @@ const TodoList = (props: {
   );
 };
 
-export default TodoList;
+export default React.memo(TodoList);

@@ -5,12 +5,13 @@ import { TodoItem } from "../utils/interface";
 
 const TodoDetails = () => {
   const { id } = useParams();
+  // let param =
   const [todo, setTodo] = useState<TodoItem | null>(null);
 
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const response = await fetch(`${DATA_URL}/${id}`);
+        const response = await fetch(`${DATA_URL}/${Number(id)}`);
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
@@ -40,4 +41,4 @@ const TodoDetails = () => {
   );
 };
 
-export default TodoDetails;
+export default React.memo(TodoDetails);

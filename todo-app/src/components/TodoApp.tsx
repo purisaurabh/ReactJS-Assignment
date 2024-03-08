@@ -1,47 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import AddTodoForm from "./AddTodoForm";
-import TodoFilter from "./TodoFilter";
-import TodoList from "./TodoList";
 import { TodoItem } from "../utils/interface";
-
-import { DATA_URL } from "../utils/constants";
 import usePost from "../customHooks/usePost";
-import useFetch from "../customHooks/useFetch";
+import { useNavigate } from "react-router-dom";
+import { DataContext } from "../context/RouterContext";
 
 const TodoApp = () => {
-  const todoItems = useFetch();
+  const todoItems = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
-
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
   const { fetchPost } = usePost();
 
+  setTodos(todoItems);
   console.log({ todoItems });
 
-  // we should have this is in another component
-  useEffect(() => {
-    fetch(DATA_URL)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((response) => {
-        setTodos(response);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch data");
-        setLoading(false);
-      });
-  }, []);
-
   const addTodo = async (title: string) => {
-    const newTodo = { id: todos.length + 1, title, completed: false };
+    const newTodo = {
+      id: (todos.length + 1).toString(),
+      title,
+      completed: false,
+    };
     const flagValue = await fetchPost(newTodo);
     if (flagValue) {
       alert("Add Todo Successfully");
+      navigate("/show-all");
     }
     setTodos([...todos, newTodo]);
   };
@@ -53,4 +35,4 @@ const TodoApp = () => {
   );
 };
 
-export default TodoApp;
+export default React.memo(TodoApp);

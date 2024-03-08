@@ -1,17 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
-import useFetch from "../customHooks/useFetch";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { TodoItem } from "../utils/interface";
 import ShowSearchTodo from "./ShowSearchTodo";
+import { DataContext } from "../context/RouterContext";
 
 const Search = () => {
+  const todoData = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [fileredData, setFilteredData] = useState<TodoItem[]>([]);
   const [searchText, setSearchText] = useState("");
-  const todoData = useFetch();
-  useEffect(() => {
-    console.log("Data in useffect : ", todoData);
-    setTodos(todoData);
-  }, [todoData]);
+
+  setTodos(todoData);
+
   return (
     <>
       <input
@@ -44,7 +43,7 @@ const Search = () => {
           {fileredData.map((todo) => (
             <li key={todo.id}>
               <ShowSearchTodo
-                id={todo.id}
+                id={todo.id.toString()}
                 title={todo.title}
                 completed={todo.completed}
               />
@@ -56,4 +55,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default React.memo(Search);

@@ -1,18 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import useFetch from "../customHooks/useFetch";
 import { TodoItem } from "../utils/interface";
 import ShowSearchTodo from "./ShowSearchTodo";
+import { DataContext } from "../context/RouterContext";
 
 const SortTodos = () => {
+  const todoData = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [sortData, setSortData] = useState<TodoItem[]>([]);
   const [sortText, setSortText] = useState("");
-  const todoData = useFetch();
 
-  useEffect(() => {
-    console.log("Data in useffect : ", todoData);
-    setTodos(todoData);
-  }, [todoData]);
+  setTodos(todoData);
 
   const sortByName = (order: string) => {
     // sort are modify the original array have to create the copt
@@ -64,4 +62,4 @@ const SortTodos = () => {
   );
 };
 
-export default SortTodos;
+export default React.memo(SortTodos);

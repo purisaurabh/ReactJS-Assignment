@@ -1,18 +1,16 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useContext, useEffect, useState } from "react";
 import { TodoItem } from "../utils/interface";
 import useFetch from "../customHooks/useFetch";
 import ShowSearchTodo from "./ShowSearchTodo";
+import { DataContext } from "../context/RouterContext";
 
 const ShowCompletedData = () => {
+  const todoData = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [inputText, setInputText] = useState("");
   const [completedData, setCompletedData] = useState<TodoItem[]>([]);
-  const todoData = useFetch();
 
-  useEffect(() => {
-    console.log("Data in useffect : ", todoData);
-    setTodos(todoData);
-  }, [todoData]);
+  setTodos(todoData);
 
   const getCompletedData = (value: string) => {
     let flagValue: boolean;
@@ -62,4 +60,4 @@ const ShowCompletedData = () => {
   );
 };
 
-export default ShowCompletedData;
+export default React.memo(ShowCompletedData);

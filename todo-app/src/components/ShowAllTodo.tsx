@@ -1,49 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TodoItem } from "../utils/interface";
 import { DATA_URL } from "../utils/constants";
 import TodoFilter from "./TodoFilter";
 import TodoList from "./TodoList";
-import useFetch from "../customHooks/useFetch";
+
+import { DataContext } from "../context/RouterContext";
 
 const ShowAllTodo = () => {
+  const data = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
   const [showCompleted, setShowCompleted] = useState(false);
-  //   useEffect(() => {
-  //     fetch(DATA_URL)
-  //       .then((res) => {
-  //         if (!res.ok) {
-  //           throw new Error(`HTTP error! Status: ${res.status}`);
-  //         }
-  //         return res.json();
-  //       })
-  //       .then((response) => {
-  //         setTodos(response);
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         setError("Failed to fetch data");
-  //         setLoading(false);
-  //       });
-  //   }, []);
 
-  const todoData = useFetch();
-  useEffect(() => {
-    console.log("Data in useeffect : ", todoData);
-    setTodos(todoData);
-    setLoading(false);
-  }, [todoData]);
+  setTodos(data);
+  setLoading(false);
 
   const displayTodos = showCompleted
     ? todos.filter((todo) => todo.completed === true)
     : todos;
 
-  const deleteTodo = (id: number): void => {
+  const deleteTodo = (id: string): void => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const markedTodoCompleted = (id: number, completed: boolean) => {
+  const markedTodoCompleted = (id: string, completed: boolean) => {
     setTodos(
       todos.map((todo) => {
         if (id === todo.id) {
@@ -76,4 +57,4 @@ const ShowAllTodo = () => {
   );
 };
 
-export default ShowAllTodo;
+export default React.memo(ShowAllTodo);

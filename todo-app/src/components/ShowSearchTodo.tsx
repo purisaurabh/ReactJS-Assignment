@@ -5,7 +5,7 @@ const ShowSearchTodo = ({
   title,
   completed,
 }: {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
 }) => {
@@ -20,4 +20,4 @@ const ShowSearchTodo = ({
   );
 };
 
-export default ShowSearchTodo;
+export default React.memo(ShowSearchTodo);
