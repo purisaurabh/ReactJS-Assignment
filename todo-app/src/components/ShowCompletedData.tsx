@@ -10,7 +10,10 @@ const ShowCompletedData = () => {
   const [inputText, setInputText] = useState("");
   const [completedData, setCompletedData] = useState<TodoItem[]>([]);
 
-  setTodos(todoData);
+  useEffect(() => {
+    setTodos(todoData);
+    console.log({ todoData });
+  });
 
   const getCompletedData = (value: string) => {
     let flagValue: boolean;

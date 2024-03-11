@@ -31,11 +31,6 @@
       "completed": false
     },
     {
-      "id": "7",
-      "title": "new data",
-      "completed": false
-    },
-    {
       "id": "8",
       "title": "todo with new task",
       "completed": false
@@ -56,9 +51,19 @@
       "completed": false
     },
     {
-      "id": "1",
-      "title": "xyz",
+      "id": "12",
+      "title": "with common value",
       "completed": false
+    },
+    {
+      "id": "12",
+      "title": "with another new value",
+      "completed": false
+    },
+    {
+      "id": "89d880e8-7304-41d6-8a06-8684bd046a78",
+      "title": "using uuid",
+      "completed": true
     }
   ]
 }

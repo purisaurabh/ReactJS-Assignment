@@ -9,7 +9,10 @@ const Search = () => {
   const [fileredData, setFilteredData] = useState<TodoItem[]>([]);
   const [searchText, setSearchText] = useState("");
 
-  setTodos(todoData);
+  useEffect(() => {
+    setTodos(todoData);
+    console.log({ todoData });
+  }, [todoData]);
 
   return (
     <>

@@ -5,6 +5,8 @@ import TodoFilter from "./TodoFilter";
 import TodoList from "./TodoList";
 
 import { DataContext } from "../context/RouterContext";
+import useDelete from "../customHooks/useDelete";
+import useUpdate from "../customHooks/useUpdate";
 
 const ShowAllTodo = () => {
   const data = useContext(DataContext);
@@ -12,28 +14,44 @@ const ShowAllTodo = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
   const [showCompleted, setShowCompleted] = useState(false);
-
-  setTodos(data);
-  setLoading(false);
+  const { deleteData } = useDelete();
+  const { updateData } = useUpdate();
+  useEffect(() => {
+    setTodos(data);
+    setLoading(false);
+  }, [data]);
 
   const displayTodos = showCompleted
     ? todos.filter((todo) => todo.completed === true)
     : todos;
 
-  const deleteTodo = (id: string): void => {
+  const deleteTodo = async (id: string) => {
+    const flagValue = await deleteData(id);
+    if (flagValue) {
+      alert("Delete Successfully");
+    }
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
-  const markedTodoCompleted = (id: string, completed: boolean) => {
-    setTodos(
-      todos.map((todo) => {
-        if (id === todo.id) {
-          return { ...todo, completed: completed };
-        } else {
-          return todo;
-        }
-      })
-    );
+  const markedTodoCompleted = async (id: string, completed: boolean) => {
+    try {
+      const flagValue = await updateData(id, completed);
+      if (flagValue) {
+        alert("Mark as completed");
+      }
+      setTodos(
+        todos.map((todo) => {
+          if (id === todo.id) {
+            updateData(id, completed);
+            return { ...todo, completed: completed };
+          } else {
+            return todo;
+          }
+        })
+      );
+    } catch (error) {
+      console.log("Error occured");
+    }
   };
 
   return (

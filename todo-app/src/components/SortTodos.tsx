@@ -10,7 +10,10 @@ const SortTodos = () => {
   const [sortData, setSortData] = useState<TodoItem[]>([]);
   const [sortText, setSortText] = useState("");
 
-  setTodos(todoData);
+  useEffect(() => {
+    setTodos(todoData);
+    console.log({ todoData });
+  }, [todoData]);
 
   const sortByName = (order: string) => {
     // sort are modify the original array have to create the copt
