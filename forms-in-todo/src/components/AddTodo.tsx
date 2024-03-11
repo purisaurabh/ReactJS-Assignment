@@ -65,22 +65,28 @@ const TodoForm = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleCreateTodo}>
-        <label>Title:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+    <div className="d-flex flex-row m-5">
+      <form className="block " onSubmit={handleCreateTodo}>
+        <div className="m-10">
+          <label>Title:</label>
+          <input
+            className="rounded visible"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
         {errors.title && <div style={{ color: "red" }}>{errors.title}</div>}
 
-        <label>Due Date:</label>
-        <input
-          type="text"
-          value={dueDate}
-          onChange={(e) => setDueDate(e.target.value)}
-        />
+        <div className="m-10">
+          <label>Due Date:</label>
+          <input
+            className="rounded"
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+        </div>
         {errors.dueDate && <div style={{ color: "red" }}>{errors.dueDate}</div>}
 
         <button type="submit">Create Todo</button>
