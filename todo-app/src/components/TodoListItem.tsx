@@ -1,19 +1,33 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { FunctionComponentContext } from "./TodoApp";
 
+const TodoListItem = ({
+  completed,
+  title,
+  id,
+}: {
+  completed: boolean;
+  title: string;
+  id: number;
+}) => {
+  const todoContext = useContext(FunctionComponentContext);
 
-const TodoListItem = ({ completed, title, id, markTodoCompleted, deleteTodo }: { completed: boolean, title: string, id: number, markTodoCompleted: (id: number, completed: boolean) => void, deleteTodo: (id: number) => void }) => {
-    const navigate = useNavigate();
-    const handleTitleClick = () => {
-        navigate(`/todo-details/${id}`);
-    };
-    return (
-        <div>
-            <input type='checkbox' checked={completed} onChange={(e) => markTodoCompleted(id, e.target.checked)}></input>
-            <label onClick={handleTitleClick} >{title}</label>
-            <button onClick={() => deleteTodo(id)}>Delete</button>
-        </div>
-    )
-}
+  const navigate = useNavigate();
+  const handleTitleClick = () => {
+    navigate(`/todo-details/${id}`);
+  };
+  return (
+    <div>
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={(e) => todoContext?.markedTodoCompleted(id, e.target.checked)}
+      ></input>
+      <label onClick={handleTitleClick}>{title}</label>
+      <button onClick={() => todoContext?.deleteTodo(id)}>Delete</button>
+    </div>
+  );
+};
 
-export default TodoListItem
+export default TodoListItem;
