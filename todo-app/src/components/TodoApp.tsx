@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import { TodoItem } from "../utils/interface";
 import usePost from "../customHooks/usePost";
@@ -11,12 +11,14 @@ const TodoApp = () => {
   const navigate = useNavigate();
   const { fetchPost } = usePost();
 
-  setTodos(todoItems);
-  console.log({ todoItems });
+  useEffect(() => {
+    setTodos(todoItems);
+    console.log({ todoItems });
+  }, [todoItems]);
 
   const addTodo = async (title: string) => {
     const newTodo = {
-      id: (todos.length + 1).toString(),
+      id: crypto.randomUUID().toString(),
       title,
       completed: false,
     };
