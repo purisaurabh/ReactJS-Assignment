@@ -15,6 +15,7 @@ const AddTodoForm = ({ addTodo }: { addTodo: (title: string) => void }) => {
             addTodo(addTodoInput);
             setAddTodoInput("");
           }}
+          disabled={!addTodoInput}
         >
           Add Todo
         </button>
