@@ -1,37 +1,7 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from "react";
-import useFetch from "../customHooks/useFetch";
-import { TodoItem } from "../utils/interface";
-import ShowSearchTodo from "./ShowSearchTodo";
-import { DataContext } from "../context/RouterContext";
+import React, { ChangeEvent, useState } from "react";
 
-const SortTodos = () => {
-  const todoData = useContext(DataContext);
-  const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [sortData, setSortData] = useState<TodoItem[]>([]);
+const SortTodos = (props: { sortByName: Function }) => {
   const [sortText, setSortText] = useState("");
-
-  useEffect(() => {
-    setTodos(todoData);
-    console.log({ todoData });
-  }, [todoData]);
-
-  const sortByName = (order: string) => {
-    // sort are modify the original array have to create the copt
-    const todoCopy = [...todos];
-    const sortedData = todoCopy.sort((a, b) => {
-      const firstName = a.title.toLowerCase();
-      const secondName = b.title.toLowerCase();
-
-      if (order === "asc") {
-        return firstName.localeCompare(secondName);
-      } else if (order === "desc") {
-        return secondName.localeCompare(firstName);
-      }
-      return 0;
-    });
-
-    setSortData(sortedData);
-  };
 
   return (
     <>
@@ -44,23 +14,7 @@ const SortTodos = () => {
         }
       />
 
-      <button onClick={() => sortByName(sortText)}>Sort</button>
-
-      {sortText && sortData.length === 0 ? (
-        <p>No data available</p>
-      ) : (
-        <ul>
-          {sortData.map((todo) => (
-            <li key={todo.id}>
-              <ShowSearchTodo
-                id={todo.id}
-                title={todo.title}
-                completed={todo.completed}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      <button onClick={() => props.sortByName(sortText)}>Sort</button>
     </>
   );
 };

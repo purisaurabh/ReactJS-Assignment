@@ -4,7 +4,6 @@ import { TodoItem } from "../utils/interface";
 import usePost from "../customHooks/usePost";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/RouterContext";
-import useFetch from "../customHooks/useFetch";
 
 const TodoApp = () => {
   const todoItems = useContext(DataContext);
@@ -21,6 +20,7 @@ const TodoApp = () => {
     const newTodo = {
       id: crypto.randomUUID().toString(),
       title,
+
       completed: false,
     };
     const flagValue = await fetchPost(newTodo);

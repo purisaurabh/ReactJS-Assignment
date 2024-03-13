@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { TodoItem } from "../utils/interface";
-import { DATA_URL } from "../utils/constants";
+import { Filter, Order, TodoItem } from "../utils/interface";
+
 import TodoFilter from "./TodoFilter";
 import TodoList from "./TodoList";
 
@@ -11,19 +11,44 @@ import useUpdate from "../customHooks/useUpdate";
 const ShowAllTodo = () => {
   const data = useContext(DataContext);
   const [todos, setTodos] = useState<TodoItem[]>([]);
+  const [displayTodos, setDisplayTodos] = useState<TodoItem[]>([]);
+  const [showCompletedData, setShowCompletedData] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string>("");
-  const [showCompleted, setShowCompleted] = useState(false);
   const { deleteData } = useDelete();
   const { updateData } = useUpdate();
+
   useEffect(() => {
     setTodos(data);
+    setDisplayTodos(data);
     setLoading(false);
+    console.log("In UseEffect");
   }, [data]);
 
-  const displayTodos = showCompleted
+  const getShowCompletedData = showCompletedData
     ? todos.filter((todo) => todo.completed === true)
     : todos;
+
+  const sortByName = (order: string) => {
+    console.log("In sort function");
+    const todoCopy = [...displayTodos];
+    const sortedData = todoCopy.sort((a, b) => {
+      const firstName = a.title.toLowerCase();
+      const secondName = b.title.toLowerCase();
+
+      if (order === Order.asc) {
+        return firstName.localeCompare(secondName);
+      } else if (order === Order.desc) {
+        return secondName.localeCompare(firstName);
+      }
+      return 0;
+    });
+
+    setDisplayTodos(sortedData);
+    console.log("Sorted data inside: ", sortedData);
+  };
+
+  console.log("sorted data outside :", displayTodos);
 
   const deleteTodo = async (id: string) => {
     const flagValue = await deleteData(id);
@@ -54,11 +79,41 @@ const ShowAllTodo = () => {
     }
   };
 
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value;
+    console.log(searchTerm);
+
+    if (todos) {
+      console.log("handlesearch");
+      const filteredCompletedTodo = todos.filter(
+        (todo) => todo.completed && todo.title.includes(searchTerm)
+      );
+      setDisplayTodos(filteredCompletedTodo);
+    }
+  };
+
+  const getCompletedData = (value: string) => {
+    let filteredTodos = [];
+
+    if (value === Filter.complete) {
+      filteredTodos = todos.filter((todo) => todo.completed === true);
+    } else if (value === Filter.incomplete) {
+      filteredTodos = todos.filter((todo) => todo.completed === false);
+    } else {
+      filteredTodos = todos;
+    }
+
+    setDisplayTodos(filteredTodos);
+  };
+
   return (
     <>
       <TodoFilter
-        showCompleted={showCompleted}
-        setShowCompleted={setShowCompleted}
+        getCompletedData={getCompletedData}
+        sortByName={sortByName}
+        handleSearch={handleSearchChange}
+        showCompleted={showCompletedData}
+        setShowCompleted={setShowCompletedData}
       />
       {error.length ? (
         <p>{error}</p>
