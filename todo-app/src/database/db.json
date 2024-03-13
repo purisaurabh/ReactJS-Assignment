@@ -23,7 +23,7 @@
     {
       "id": "5",
       "title": "this is the eighth task",
-      "completed": false
+      "completed": true
     },
     {
       "id": "6",
@@ -68,6 +68,11 @@
     {
       "id": "dc4876d7-0e5d-4c68-9956-065a0af95f6a",
       "title": "After adding the toasting",
+      "completed": false
+    },
+    {
+      "id": "b1bb731c-9822-46bc-83d6-780a8d55b8de",
+      "title": "Complete all assignment",
       "completed": false
     }
   ]
