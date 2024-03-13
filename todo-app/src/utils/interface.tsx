@@ -3,3 +3,13 @@ export interface TodoItem {
   title: string;
   completed: boolean;
 }
+
+export enum Order {
+  asc = "Ascending",
+  desc = "Descending",
+}
+
+export enum Filter {
+  complete = "Completed",
+  incomplete = "InCompleted",
+}
