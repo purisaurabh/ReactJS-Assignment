@@ -18,9 +18,6 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<TodoApp />} />
             <Route path="/show-all" element={<ShowAllTodo />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/sort" element={<SortTodos />} />
-            <Route path="/filter" element={<ShowCompletedData />} />
             <Route path="/todo-details/:id" element={<TodoDetails />} />
           </Routes>
         </BrowserRouter>

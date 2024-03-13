@@ -12,34 +12,12 @@ const Search = () => {
 
   useEffect(() => {
     setTodos(todoData);
+    setFilteredData(todoData);
     console.log({ todoData });
   }, [todoData]);
 
   return (
     <>
-      {/* <input
-        value={searchText}
-        placeholder="enter value to search.."
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setSearchText(e.target.value)
-        }
-      />
-
-      <button
-        onClick={() => {
-          if (todos) {
-            const searchedText = todos.filter(
-              (res) =>
-                res.title &&
-                res.title.toLowerCase().includes(searchText.toLowerCase())
-            );
-            setFilteredData(searchedText);
-          }
-        }}
-      >
-        Search
-      </button> */}
-
       <div className=" mx-auto mt-10 max-w-md">
         <div className="flex items-center gap-4">
           <input
@@ -53,7 +31,6 @@ const Search = () => {
             style={{ borderColor: "#ddd", borderWidth: "1px" }}
           />
 
-          {/* Search Button */}
           <button
             onClick={() => {
               if (todos) {

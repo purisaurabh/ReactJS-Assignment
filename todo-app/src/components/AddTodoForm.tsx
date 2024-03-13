@@ -17,12 +17,12 @@ const AddTodoForm = ({ addTodo }: { addTodo: (title: string) => void }) => {
             style={{ backgroundColor: "#f9f9f9" }}
           />
 
-          {/* Add Button */}
           <button
             onClick={() => {
               addTodo(addTodoInput);
               setAddTodoInput("");
             }}
+            disabled={!addTodoInput}
             className="btn d-flex items-center justify-center gap-2 w-full text-white  rounded-lg shadow-md font-medium tracking-wide cursor-pointer transition-all duration-200 ease-in-out transform hover:scale-105"
             style={{ backgroundColor: "#4f46e5" }}
           >
@@ -31,22 +31,6 @@ const AddTodoForm = ({ addTodo }: { addTodo: (title: string) => void }) => {
           </button>
         </div>
       </div>
-
-      {/* <div className="d-flex gap-2">
-        <input
-          type="text"
-          value={addTodoInput}
-          onChange={(e) => setAddTodoInput(e.target.value)}
-        ></input>
-        <button
-          onClick={() => {
-            addTodo(addTodoInput);
-            setAddTodoInput("");
-          }}
-        >
-          Add Todo
-        </button>
-      </div> */}
     </>
   );
 };
