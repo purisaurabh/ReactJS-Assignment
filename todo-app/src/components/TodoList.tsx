@@ -9,7 +9,7 @@ const TodoList = (props: {
 }) => {
   return (
     <div>
-      <h3>Todo List</h3>
+      <h3 className="d-flex justify-center item-center mt-4">Todo List</h3>
       <ul>
         {props.todos.map((todo) => (
           <li key={todo.id}>
