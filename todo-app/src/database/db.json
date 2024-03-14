@@ -56,11 +56,6 @@
       "completed": false
     },
     {
-      "id": "12",
-      "title": "with another new value",
-      "completed": false
-    },
-    {
       "id": "89d880e8-7304-41d6-8a06-8684bd046a78",
       "title": "using uuid",
       "completed": true
