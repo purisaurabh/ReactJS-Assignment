@@ -1,17 +1,55 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { TodoItem } from "../utils/interface";
 import useFetch from "../customHooks/useFetch";
 import ShowSearchTodo from "./ShowSearchTodo";
-import { DataContext } from "../context/RouterContext";
+
+interface StateType {
+  todos: TodoItem[];
+  completedData: TodoItem[];
+  inputText: string;
+}
+
+const initialValue: StateType = {
+  todos: [],
+  completedData: [],
+  inputText: "",
+};
+
+// this is for the actions
+type Action =
+  | { type: "SET_TODOS"; payload: TodoItem[] }
+  | { type: "SET_COMPLETED_DATA"; payload: TodoItem[] }
+  | { type: "SET_SEARCH_TEXT"; payload: string };
+
+const reducer = (state: StateType, action: Action) => {
+  switch (action.type) {
+    case "SET_TODOS":
+      return { ...state, todos: action.payload };
+    case "SET_COMPLETED_DATA":
+      return { ...state, filterTodo: action.payload };
+    case "SET_SEARCH_TEXT":
+      return { ...state, searchText: action.payload };
+    default:
+      return state;
+  }
+};
 
 const ShowCompletedData = () => {
-  const todoData = useContext(DataContext);
-  const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [inputText, setInputText] = useState("");
-  const [completedData, setCompletedData] = useState<TodoItem[]>([]);
+  const todoData = useFetch();
+  // const [todos, setTodos] = useState<TodoItem[]>([]);
+  // const [completedData, setCompletedData] = useState<TodoItem[]>([]);
+  // const [inputText, setInputText] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialValue);
 
   useEffect(() => {
-    setTodos(todoData);
+    // setTodos(todoData);
+    dispatch({ type: "SET_TODOS", payload: todoData });
     console.log({ todoData });
   });
 
@@ -22,33 +60,37 @@ const ShowCompletedData = () => {
     } else if (value === "incomplete") {
       flagValue = false;
     }
-    const completedValue = todos.filter((todo) => todo.completed === flagValue);
-    setCompletedData(completedValue);
+    const completedValue = state.todos.filter(
+      (todo) => todo.completed === flagValue
+    );
+    // setCompletedData(completedValue);
+    dispatch({ type: "SET_COMPLETED_DATA", payload: completedValue });
   };
   return (
     <>
       <input
         type="text"
-        value={inputText}
+        value={state.inputText}
         placeholder="enter the flag value"
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setInputText(e.target.value)
+          // setInputText(e.target.value)
+          dispatch({ type: "SET_SEARCH_TEXT", payload: e.target.value })
         }
       />
 
       <button
         onClick={() => {
-          getCompletedData(inputText);
+          getCompletedData(state.inputText);
         }}
       >
         Filter
       </button>
 
-      {inputText && completedData.length === 0 ? (
+      {state.inputText && state.completedData.length === 0 ? (
         <p>No data available</p>
       ) : (
         <ul>
-          {completedData.map((todo) => (
+          {state.completedData.map((todo) => (
             <li key={todo.id}>
               <ShowSearchTodo
                 id={todo.id}
