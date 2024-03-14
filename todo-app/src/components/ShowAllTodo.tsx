@@ -6,92 +6,64 @@ import TodoList from "./TodoList";
 import { DataContext } from "../context/RouterContext";
 import useDelete from "../customHooks/useDelete";
 import useUpdate from "../customHooks/useUpdate";
+import useFetch from "../customHooks/useFetch";
 
-const initialValue = {
+interface StateType {
+  todos: TodoItem[];
+  loading: boolean;
+  error: string;
+  showComplete: boolean;
+}
+
+const initialValue: StateType = {
   todos: [],
   loading: true,
-  error: null,
+  error: "",
+  showComplete: false,
 };
 
-const reducerAction = {
-  setTodo: "setTodo",
-  setLoading: "setLoading",
-  setError: "setError",
-};
+type ActionType =
+  | { type: "SET_TODOS"; payload: TodoItem[] }
+  | { type: "SET_LAODING"; payload: boolean }
+  | { type: "SET_ERROR"; payload: string }
+  | { type: "SHOW_COMPLETED"; payload: boolean };
 
-const payloadTypes = {};
-
-const actions = {
-  type: reducerAction,
-  payload: payloadTypes,
-};
-
-interface TodoAction {
-  type: "setTodo";
-  payload: TodoItem[];
-}
-interface LoadingAction {
-  type: "setLoading";
-  payload: boolean;
-}
-
-interface ApiDataAction {
-  type: "apiData";
-  payload: TodoItem[];
-}
-
-function setTodo(data: TodoItem[]): TodoAction {
-  return {
-    type: "setTodo",
-    payload: data,
-  };
-}
-
-function apiData(data: TodoItem[]): ApiDataAction {
-  return {
-    type: "apiData",
-    payload: data,
-  };
-}
-
-type Action = TodoAction | LoadingAction | ApiDataAction;
-
-const reducer = (state: any, action: Action) => {
+const reducer = (state: StateType, action: ActionType) => {
   switch (action.type) {
-    case "apiData":
-      ///
-      return { ...state, todos: action.payload, loading: false };
-    case "setTodo":
+    case "SET_TODOS":
       return { ...state, todos: action.payload };
-    case "setLoading":
+    case "SET_LAODING":
       return { ...state, loading: action.payload };
+    case "SET_ERROR":
+      return { ...state, error: action.payload };
+    case "SHOW_COMPLETED":
+      return { ...state, showComplete: action.payload };
+    default:
+      return state;
   }
 };
 
 const ShowAllTodo = () => {
-  const data = useContext(DataContext);
+  const data = useFetch();
   // const [todos, setTodos] = useState<TodoItem[]>([]);
   // const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string>("");
-  const [showCompleted, setShowCompleted] = useState(false);
+  // const [error, setError] = useState<string>("");
+  // const [showCompleted, setShowCompleted] = useState(false);
   const { deleteData } = useDelete();
   const { updateData } = useUpdate();
 
   const [state, dispatch] = useReducer(reducer, initialValue);
-  const { todos, loading } = state;
 
   useEffect(() => {
-    dispatch(apiData(data));
-    // dispatch({ type: "setTodo", payload: data });
-    // dispatch({ type: "setLoading", payload: false });
-
+    dispatch({ type: "SET_TODOS", payload: data });
+    dispatch({ type: "SET_LAODING", payload: false });
     // setTodos(data);
     // setLoading(false);
   }, [data]);
 
-  const displayTodos = showCompleted
-    ? todos.filter((todo: any) => todo.completed === true)
-    : todos;
+  const displayTodos = state.showComplete
+    ? state.todos.filter((todo: TodoItem) => todo.completed === true)
+    : state.todos;
 
   const deleteTodo = async (id: string) => {
     const flagValue = await deleteData(id);
@@ -100,8 +72,8 @@ const ShowAllTodo = () => {
     }
     // setTodos(todos.filter((todo) => todo.id !== id));
     dispatch({
-      type: "setTodo",
-      payload: todos.filter((todo: any) => todo.completed === true),
+      type: "SET_TODOS",
+      payload: state.todos.filter((todo: TodoItem) => todo.completed === true),
     });
   };
 
@@ -122,8 +94,8 @@ const ShowAllTodo = () => {
       //   })
       // );
       dispatch({
-        type: "setTodo",
-        payload: todos.map((todo: any) => {
+        type: "SET_TODOS",
+        payload: state.todos.map((todo: TodoItem) => {
           if (id === todo.id) {
             updateData(id, completed);
             return { ...todo, completed: completed };
@@ -140,12 +112,14 @@ const ShowAllTodo = () => {
   return (
     <>
       <TodoFilter
-        showCompleted={showCompleted}
-        setShowCompleted={setShowCompleted}
+        showCompleted={state.showComplete}
+        setShowCompleted={(value: boolean) =>
+          dispatch({ type: "SHOW_COMPLETED", payload: value })
+        }
       />
-      {error.length ? (
-        <p>{error}</p>
-      ) : loading ? (
+      {state.error.length ? (
+        <p>{state.error}</p>
+      ) : state.loading ? (
         <p>Loading...</p>
       ) : (
         <TodoList
