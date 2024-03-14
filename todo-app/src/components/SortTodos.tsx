@@ -9,7 +9,6 @@ const SortTodos = () => {
   const [sortText, setSortText] = useState("");
 
   const sortByName = (order: string) => {
-    // sort are modify the original array have to create the copt
     const todoCopy = [...data];
     const sortedData = todoCopy.sort((a, b) => {
       const firstName = a.title.toLowerCase();

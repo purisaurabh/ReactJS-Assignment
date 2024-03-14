@@ -11,18 +11,17 @@ const TodoList = (props: {
     <div>
       <h3>Todo List</h3>
       <ul>
-        {props.todos &&
-          props?.todos?.map((todo) => (
-            <li key={todo.id}>
-              <TodoListItem
-                id={todo.id}
-                completed={todo.completed}
-                title={todo.title}
-                markTodoCompleted={props.markTodoCompleted}
-                deleteTodo={props.deleteTodo}
-              />
-            </li>
-          ))}
+        {props?.todos?.map((todo) => (
+          <li key={todo.id}>
+            <TodoListItem
+              id={todo.id}
+              completed={todo.completed}
+              title={todo.title}
+              markTodoCompleted={props.markTodoCompleted}
+              deleteTodo={props.deleteTodo}
+            />
+          </li>
+        ))}
       </ul>
     </div>
   );

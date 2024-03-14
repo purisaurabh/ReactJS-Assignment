@@ -3,26 +3,34 @@ import { TodoItem } from "../utils/interface";
 import TodoFilter from "./TodoFilter";
 import TodoList from "./TodoList";
 
-import useFetch from "../customHooks/useFetch";
+// import useFetch from "../customHooks/useFetch";
+import { useQuery } from "@tanstack/react-query";
+import { fetchPosts } from "../pagination/fetchPost";
 
 const ShowAllTodo = () => {
-  const { data, isError, isLoading, error, pageData } = useFetch();
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [showCompleted, setShowCompleted] = useState(false);
+  const [page, setPage] = useState<number>(1);
 
-  const [page, setPage] = useState(1);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: ["posts", { page }],
+    queryFn: () => fetchPosts(page),
+  });
+
+  console.log({ data });
+
   useEffect(() => {
-    setTodos(data);
+    if (data) {
+      setTodos(data);
+    }
   }, [data]);
-
-  console.log("Data from page url : ", pageData);
-  console.log("data after storting : ", todos);
+  console.log("data after storing : ", todos);
   const displayTodos = showCompleted
-    ? todos.filter((todo: TodoItem) => todo.completed === true)
+    ? todos?.filter((todo: TodoItem) => todo.completed === true)
     : todos;
 
   const deleteTodo = (id: string): void => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+    setTodos(todos?.filter((todo) => todo.id !== id));
   };
 
   const markedTodoCompleted = (id: string, completed: boolean) => {
@@ -48,34 +56,39 @@ const ShowAllTodo = () => {
       ) : isLoading ? (
         <p>Loading...</p>
       ) : (
-        <TodoList
-          todos={todos}
-          markTodoCompleted={markedTodoCompleted}
-          deleteTodo={deleteTodo}
-        />
+        <div>
+          <div>
+            {/* <TodoList
+              todos={todos}
+              markTodoCompleted={markedTodoCompleted}
+              deleteTodo={deleteTodo}
+            /> */}
+            {data &&
+              data?.data?.map((todo: TodoItem) => (
+                <div key={todo.id} className="post">
+                  <div>{todo.title}</div>
+                </div>
+              ))}
+          </div>
+          <div className="pages">
+            <button
+              onClick={() => setPage((oldPage) => Math.max(oldPage - 1, 0))}
+              disabled={!data?.prev}
+            >
+              Previous
+            </button>
+            <span>{page}</span>
+            <button
+              onClick={() => {
+                setPage((newPage) => newPage + 1);
+              }}
+              disabled={!data?.next}
+            >
+              Next
+            </button>
+          </div>
+        </div>
       )}
-
-      {console.log({ data })}
-      <button
-        onClick={() => setPage((old) => Math.max(old - 1, 0))}
-        disabled={!pageData?.pre}
-      >
-        Previous Page
-      </button>
-      <span>{page}</span>
-      <button
-        onClick={() => {
-          // if (!isPlaceholderData && data?.next) {
-          if (pageData?.next) {
-            setPage((old) => old + 1);
-          }
-        }}
-        // Disable the Next Page button until we know a next page is available
-        // disabled={isPlaceholderData || !data?.next}
-        disabled={!data?.next}
-      >
-        Next Page
-      </button>
     </>
   );
 };
