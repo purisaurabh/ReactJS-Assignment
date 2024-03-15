@@ -45,6 +45,7 @@ const ShowAllTodo = () => {
     );
   };
 
+  console.log({ todos });
   return (
     <>
       <TodoFilter
@@ -58,17 +59,11 @@ const ShowAllTodo = () => {
       ) : (
         <div>
           <div>
-            {/* <TodoList
+            <TodoList
               todos={todos}
               markTodoCompleted={markedTodoCompleted}
               deleteTodo={deleteTodo}
-            /> */}
-            {data &&
-              data?.data?.map((todo: TodoItem) => (
-                <div key={todo.id} className="post">
-                  <div>{todo.title}</div>
-                </div>
-              ))}
+            />
           </div>
           <div className="pages">
             <button
