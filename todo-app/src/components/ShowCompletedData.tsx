@@ -1,10 +1,4 @@
-import React, {
-  ChangeEvent,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import React, { ChangeEvent, useEffect, useReducer } from "react";
 import { TodoItem } from "../utils/interface";
 import useFetch from "../customHooks/useFetch";
 import ShowSearchTodo from "./ShowSearchTodo";
@@ -32,9 +26,9 @@ const reducer = (state: StateType, action: Action) => {
     case "SET_TODOS":
       return { ...state, todos: action.payload };
     case "SET_COMPLETED_DATA":
-      return { ...state, filterTodo: action.payload };
+      return { ...state, completedData: action.payload };
     case "SET_SEARCH_TEXT":
-      return { ...state, searchText: action.payload };
+      return { ...state, inputText: action.payload };
     default:
       return state;
   }
@@ -51,7 +45,7 @@ const ShowCompletedData = () => {
     // setTodos(todoData);
     dispatch({ type: "SET_TODOS", payload: todoData });
     console.log({ todoData });
-  });
+  }, [todoData]);
 
   const getCompletedData = (value: string) => {
     let flagValue: boolean;
