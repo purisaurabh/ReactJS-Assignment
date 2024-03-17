@@ -35,7 +35,7 @@ const ShowAllTodo = () => {
 
   const markedTodoCompleted = (id: string, completed: boolean) => {
     setTodos(
-      todos?.map((todo) => {
+      todos?.map((todo: TodoItem) => {
         if (id === todo.id) {
           return { ...todo, completed: completed };
         } else {
@@ -45,7 +45,7 @@ const ShowAllTodo = () => {
     );
   };
 
-  console.log({ todos });
+  console.log("for pagination : ", todos);
   return (
     <>
       <TodoFilter
@@ -72,7 +72,7 @@ const ShowAllTodo = () => {
             >
               Previous
             </button>
-            <span>{page}</span>
+            <span>{page}/{data?.pages}</span>
             <button
               onClick={() => {
                 setPage((newPage) => newPage + 1);
