@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "new task",
+      "dueDate": "01-02-2024"
+    },
+    {
+      "id": "0c4b",
+      "title": "this is the title",
+      "dueDate": "2021-01-20"
+    },
+    {
+      "id": "1709449037901",
+      "title": "this is the another title",
+      "dueDate": "2024-01-01"
+    },
+    {
+      "id": "1710237590090",
+      "title": "This is the AI title",
+      "dueDate": "2024-03-12"
+    },
+    {
+      "id": "1710237788881",
+      "title": "set another title",
+      "dueDate": "2024-03-12"
+    }
+  ]
+}
