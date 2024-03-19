@@ -1,0 +1,79 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "this is the third task",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "this is the fourth task",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "title": "this is the sixth task",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "title": "this is the seventh task",
+      "completed": true
+    },
+    {
+      "id": "5",
+      "title": "this is the eighth task",
+      "completed": true
+    },
+    {
+      "id": "6",
+      "title": "another task",
+      "completed": false
+    },
+    {
+      "id": "8",
+      "title": "todo with new task",
+      "completed": false
+    },
+    {
+      "id": "9",
+      "title": "learn react query",
+      "completed": false
+    },
+    {
+      "id": "10",
+      "title": "learn higher order function",
+      "completed": false
+    },
+    {
+      "id": "11",
+      "title": "learn render props",
+      "completed": false
+    },
+    {
+      "id": "12",
+      "title": "with common value",
+      "completed": false
+    },
+    {
+      "id": "89d880e8-7304-41d6-8a06-8684bd046a78",
+      "title": "using uuid",
+      "completed": true
+    },
+    {
+      "id": "09b64606-751e-4bd3-8ba1-08ee447442b5",
+      "title": "This is new todo with new style",
+      "completed": false
+    },
+    {
+      "id": "dc4876d7-0e5d-4c68-9956-065a0af95f6a",
+      "title": "After adding the toasting",
+      "completed": false
+    },
+    {
+      "id": "b1bb731c-9822-46bc-83d6-780a8d55b8de",
+      "title": "Complete all assignment",
+      "completed": false
+    }
+  ]
+}
