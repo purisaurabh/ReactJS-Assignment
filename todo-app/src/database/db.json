@@ -1,0 +1,69 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "this is the third task",
+      "completed": true
+    },
+    {
+      "id": "2",
+      "title": "this is the fourth task",
+      "completed": true
+    },
+    {
+      "id": "3",
+      "title": "this is the sixth task",
+      "completed": false
+    },
+    {
+      "id": "4",
+      "title": "this is the seventh task",
+      "completed": true
+    },
+    {
+      "id": "5",
+      "title": "this is the eighth task",
+      "completed": false
+    },
+    {
+      "id": "6",
+      "title": "another task",
+      "completed": false
+    },
+    {
+      "id": "8",
+      "title": "todo with new task",
+      "completed": false
+    },
+    {
+      "id": "9",
+      "title": "learn react query",
+      "completed": false
+    },
+    {
+      "id": "10",
+      "title": "learn higher order function",
+      "completed": false
+    },
+    {
+      "id": "11",
+      "title": "learn render props",
+      "completed": false
+    },
+    {
+      "id": "12",
+      "title": "with common value",
+      "completed": false
+    },
+    {
+      "id": "89d880e8-7304-41d6-8a06-8684bd046a78",
+      "title": "using uuid",
+      "completed": true
+    },
+    {
+      "id": "e7d9a7e3-de62-451a-af06-8f5b3bb1f9de",
+      "title": "do testin",
+      "completed": false
+    }
+  ]
+}
